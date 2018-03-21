@@ -1,0 +1,28 @@
+#include <iostream>
+#include <vector>
+#include <cstdio> 
+#include <algorithm>
+
+using namespace std; 
+
+int main()
+{
+	int a, b;
+	int input, n;
+
+	scanf("%d", &a);
+	vector<int> v;
+	for (int i = 0; i < a; i++) {
+		scanf("%d", &input);
+		v.push_back(input);
+	}
+	sort(v.begin(), v.end());
+
+	scanf("%d", &b);
+	for (int i = 0; i < b; i++) {
+		scanf("%d", &n);
+		printf("%d ", binary_search(v.begin(), v.end(), n));
+
+	}
+	return 0;
+}
