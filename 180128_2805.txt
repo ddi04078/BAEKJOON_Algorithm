@@ -1,0 +1,40 @@
+#include <iostream>
+#include <cstdio>
+#include <vector> 
+#include <algorithm>
+#include <cstdlib>
+using namespace std;
+
+int main(void)
+{
+    int n; //나무의 수
+    int m; //가져가야할 나무의 높이
+    scanf("%d %d",&n,&m);
+
+    int height;
+    vector<int> v;
+    for(int i=0; i<n; i++){
+	scanf("%d", &height);
+	v.push_back(height); 
+    }
+    
+    sort(v.begin(),v.end(),greater<int>());
+   
+    int index=1; 
+      
+    int store=0;  
+    int cut=v[0]; //절단기의 높이
+   
+    while(true){
+	if(store>=m){
+		printf("%d", cut);
+		return 0;
+		break;
+	}
+	while(v[index]>=cut){ index++; } 
+	store+=index;
+	cut--;
+    }    
+
+    return 0;
+}
