@@ -1,0 +1,41 @@
+#include <cstdlib>
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+bool compare_hp(int e1, int e2) {
+	return e1 > e2;
+}
+
+int main() {
+	int n; //num of ropes
+	int x; //weight that each rope can resist
+	cin >> n;
+	int *rope = new int[n];
+	for (int i = 0; i<n; i++) {
+		cin >> x;
+		rope[i] = x; //index=number of a rope / value=x=weight to resist
+	}
+
+	//sorting : great->small
+	sort(rope, rope + n, compare_hp);
+
+
+	int *weightCompare = new int[n];
+
+	for (int i = 0; i<n; i++) {
+		weightCompare[i] = rope[i] * (i + 1);
+	}
+
+	int M = weightCompare[0];
+	for (int i = 1; i<n; i++) {
+		if (weightCompare[i]>M) {
+			M = weightCompare[i];
+		}
+	}
+	cout << M;
+
+
+	return 0;
+}
