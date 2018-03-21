@@ -1,0 +1,40 @@
+#include <iostream>
+#include <cstdlib>
+#include <algorithm>
+
+using namespace std;
+
+
+bool compare_hp(int e1, int e2) {
+   return e1 > e2;
+}
+
+
+int main() {
+
+   int num;
+   cin >> num;
+
+   int *a=new int[num];
+   long long sum = 0;
+
+   for (int i = 0; i<num; i++) {
+      cin >> a[i]; 
+   }
+   sort(a, a + num, compare_hp);
+   
+   
+   for (int i = 0; i < num; i++) {
+      if (a[i] - i< 0) {  
+         a[i] = 0;
+      }
+      else {
+         sum += a[i] - i;
+      }
+   }
+
+
+   cout << sum;
+
+   return 0;
+}
