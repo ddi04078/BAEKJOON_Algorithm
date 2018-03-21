@@ -14,13 +14,13 @@ int main()
 	vector< vector<int> > now;
 	for (int i = 0; i <= n; i++) {
 		vector<int> element(m+1);
-		now.push_back(element); //element를 넣는게 뭔말이여 //배열에 추가 라고 돼있는데..
+		now.push_back(element); 
 	}
 
 	vector< vector<int> > accum;
 	for (int i = 0; i <= n; i++) {
 		vector<int> element2(m + 1);
-		accum.push_back(element2); //element를 넣는게 뭔말이여 //배열에 추가 라고 돼있는데..
+		accum.push_back(element2); 
 	}
 
 	for (int i = 1; i <= n; i++) {
