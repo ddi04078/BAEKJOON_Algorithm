@@ -1,0 +1,41 @@
+#include <iostream>
+#include <cstdlib>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main()
+{ 
+	int n;
+	int m;
+	cin >> n >> m;
+
+	vector< vector<int> > now;
+	for (int i = 0; i <= n; i++) {
+		vector<int> element(m+1);
+		now.push_back(element); //element를 넣는게 뭔말이여 //배열에 추가 라고 돼있는데..
+	}
+
+	vector< vector<int> > accum;
+	for (int i = 0; i <= n; i++) {
+		vector<int> element2(m + 1);
+		accum.push_back(element2); //element를 넣는게 뭔말이여 //배열에 추가 라고 돼있는데..
+	}
+
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= m; j++) {
+			cin >> now[i][j];
+		}
+	}
+
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= m; j++) {
+			accum[i][j] = max(accum[i-1][j], accum[i][j-1]) + now[i][j];
+		}
+	}
+
+
+	cout << accum[n][m];
+    return 0;
+}
