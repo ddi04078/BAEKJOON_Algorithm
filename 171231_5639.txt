@@ -1,0 +1,110 @@
+#include "cstdlib"
+#include "iostream"
+#include <string>
+
+using namespace std;
+
+class Node {
+private:
+	int data;
+	Node* leftChild;
+	Node* rightChild;
+	friend class Tree;
+public:
+	Node(int num) {
+		data = num;
+		leftChild = NULL;
+		rightChild = NULL;
+	}
+};
+
+class Tree
+{
+public:
+	Node * root; 
+
+	Tree() { root = NULL; };
+	Node* search(Node *, int num);
+	void insert(int num);
+	void postorder(Node* ptr);
+};
+
+//search 이 문제에서는 필요없다! (참고용)
+Node* Tree::search(Node* root,int key) {
+	Node *p;
+	p = root;
+
+	if (p== NULL) return NULL; //root가 없으면 false반환
+	else { 
+		//key 가 트리 안에 존재할때
+		if (key == p->data) return p;
+		else if ( key < p->data) search(p->leftChild,key);
+		else if (key < p->data) search(p->rightChild, key);
+		else { //key가 트리 안에 없을때
+			return NULL;
+		}
+	}
+}
+
+
+void Tree::insert(int data) {
+	 
+	Node *temp = new Node(data);
+	Node *p;
+	Node *q;
+
+	if (root == NULL) root = temp;
+	else {
+		p = root;
+		q = root;
+		int check;
+
+		//삽입 직전의 leaftnode까지 내려오는 과정
+		while (p != NULL) { //45를 삽입하려고하고 지금 50->40순으로 삽입되어있을때 
+			if (p->data > temp->data) { //50>45면 50을 가리키던 p를 왼쪽으로 내리고
+				q = p;
+				p = p->leftChild; 
+				check = 1;
+			}
+			else {//40<45니까 40을 가리키던 p를 오른쪽으로 내리고 
+				q = p;
+				p = p->rightChild;
+				check = 2;
+			}
+		}
+		 
+		//새 노드를 leaf 노드에 연결
+		if (check == 1) q->leftChild = temp;
+		else q->rightChild = temp;
+	}
+ 	//cout << data << "가 삽입되었습니다." << endl;
+}
+
+void Tree::postorder(Node* ptr) {
+//	ptr = root;
+	if(ptr->leftChild!=NULL) postorder(ptr->leftChild);
+	if(ptr->rightChild!=NULL) postorder(ptr->rightChild);
+	printf("%d \n", ptr->data);
+
+}
+
+
+int main()
+{ 
+	Tree t;
+	 
+	string str;
+	int intValue;
+
+	while (getline(cin, str)) {
+		intValue = atoi(str.c_str());
+		if (str == "")break;
+		//cout << intValue << endl;
+		t.insert(intValue);
+	}
+
+
+	t.postorder(t.root);
+	
+	return 0;
+}
